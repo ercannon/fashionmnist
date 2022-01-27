@@ -9,6 +9,7 @@ import tensorflow as tf
 from tensorflow import keras
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 fashion_mnist = keras.datasets.fashion_mnist
@@ -40,3 +41,17 @@ pd.DataFrame(history.history).plot(figsize=(8, 5))
 plt.grid(True)
 plt.gca().set_ylim(0, 1) # set the vertical range to [0-1]
 plt.show()
+
+model.evaluate(X_test, y_test)
+
+#Vamos a hacer predcciones
+
+X_new = X_test[:3]
+y_proba = model.predict(X_new)
+y_proba.round(2)
+
+y_pred = model.predict_classes(X_new)
+
+np.array(class_names)[y_pred]
+
+
