@@ -7,6 +7,9 @@ Created on Thu Jan 20 14:47:07 2022
 """
 import tensorflow as tf
 from tensorflow import keras
+import pandas as pd
+import matplotlib.pyplot as plt
+
 
 fashion_mnist = keras.datasets.fashion_mnist
 (X_train_full, y_train_full), (X_test, y_test) = fashion_mnist.load_data()
@@ -31,4 +34,9 @@ model.compile(loss="sparse_categorical_crossentropy",
 optimizer="sgd",
 metrics=["accuracy"])
 
-#history = model.fit(X_train, y_train, epochs=30, validation_data=(X_valid, y_valid))
+history = model.fit(X_train, y_train, epochs=30, validation_data=(X_valid, y_valid))
+
+pd.DataFrame(history.history).plot(figsize=(8, 5))
+plt.grid(True)
+plt.gca().set_ylim(0, 1) # set the vertical range to [0-1]
+plt.show()
